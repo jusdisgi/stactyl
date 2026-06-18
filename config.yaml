@@ -1,0 +1,63 @@
+meta:
+  engine: 4.1.0
+  name: stactyl
+  version: 0.1
+  ref: &kb_ref "stactyl v0.1"
+  author: huntercook
+  url: &kb_url https://github.com/jusdisgi/stactyl
+  footprint: &switch_footprint "switch_pg1316s"
+
+# =============================================================================
+# WIP SCAFFOLD — flat developed plate, NOT final geometry.
+# -----------------------------------------------------------------------------
+# stactyl's plate is the flat "flex-by-thinness" board: one switch per facet,
+# thin FR-4 necks between facets, PCBA'd flat then bent into the Cosmos keywell.
+#
+# The X/Y spacing below is a PLACEHOLDER flat grid. The REAL plate must use
+# *developed (arc-length) facet spacing* derived from the Cosmos per-key
+# transforms (see cad/keywell-params.md), so each facet lands on its keywell
+# post when the board is flexed. Do not route off this placeholder grid.
+#
+# TODO (the genuinely new design problem):
+#   - Replace points spacing with developed spacing from Cosmos Expert transforms.
+#   - Add neck geometry between facets; orient each neck to hinge the right way
+#     for the compound curve; validate per-neck bend angle vs FR-4 tolerance.
+#   - Add outboard pinky + 2 thumb keys per hand.
+#   - Direct-pin routing: each key its own trace to a central nice!nano; the
+#     necks nearest the MCU carry up to ~18 converging traces — validate.
+# =============================================================================
+
+units:
+  # PG1316S preset — mirrored from ../xiphos (Hunter's proven PG1316S board).
+  kx: 16
+  ky: 16
+  ks: 17   # column spacing (mikefive-style 17x17 for PG1316S)
+  kp: 17   # row spacing
+  kcow: 16 # cutout width  (= stock cap; caps bottom out by design)
+  kcoh: 16 # cutout height
+  keycw: 16
+  keych: 16
+
+points:
+  zones:
+    matrix:
+      # PLACEHOLDER flat 3x5 finger well. Replace with developed spacing.
+      key:
+        padding: kp
+        spread: ks
+      columns:
+        pinky:
+        ring:
+        middle:
+        index:
+        inner:
+      rows:
+        bottom:
+        home:
+        top:
+    # TODO: outboard pinky zone (+1 key, anchored off pinky home col, xiphos-style)
+    # TODO: thumb zone (2 keys, tucked, ~ -15..-25 deg)
+
+# pcb / outlines / cases intentionally omitted until the developed facet + neck
+# layout exists. Switch footprint is switch_pg1316s (front side, direct-pin —
+# no diodes). MCU = nice!nano, hand-soldered (DNP for JLC), placed centrally.
