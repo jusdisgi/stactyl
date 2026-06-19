@@ -1,9 +1,17 @@
-# stactyl keywell — starting parameter set
+# stactyl keywell — parameter set
 
-Generator: **Cosmos** (`https://ryanis.cool/cosmos`). Captured 2026-06-18. These are a **starting
-point** to dial in against the physical TBK Mini, *not* a precise clone of it — Hunter likes the
-TBK feel but exact matching is **not** a hard requirement (confirmed 2026-06-18), so PG1316S
-ergonomics win where they conflict.
+Generator: **Cosmos** (`https://ryanis.cool/cosmos`). These were a **starting point** to dial in
+against the physical TBK Mini, *not* a precise clone of it — Hunter likes the TBK feel but exact
+matching is **not** a hard requirement (confirmed 2026-06-18), so PG1316S ergonomics win where they
+conflict.
+
+> **STATUS — geometry LOCKED 2026-06-18.** The model has been built and renders cleanly in Cosmos.
+> The authoritative geometry now lives in **`stactyl-cosmos-expert.ts`** (Expert-mode per-key
+> transforms); this file is the human-readable rationale. Final values that differ from the
+> starting targets below: **finger spacing 18×17 mm** (standard Choc, not 17×17), **tenting 18°**,
+> outboard pinky **1u** (custom rounded/tri caps later in CAD), and **microcontroller/connectors
+> disabled** in Cosmos (controller + LiPo go in custom under-keywell pockets per the brief).
+> Still to do: **STEP/STL export** and translating the transforms into the ergogen flat plate.
 
 ## Geometry target — Dactyl Manuform Mini lineage
 
@@ -72,8 +80,14 @@ keys. Exact position/angle still open.
 
 ## Open geometry items
 
-- [ ] Build the Cosmos model with the above; export STEP + capture Expert per-key transforms.
+- [x] Build the Cosmos model + capture Expert per-key transforms (`stactyl-cosmos-expert.ts`).
+      2026-06-18. **STEP/STL export still pending** (do it from Cosmos → Download).
+- [x] Finalize 2-key thumb position/angle and the outboard pinky key. 2026-06-18 (pinky 1u).
+- [x] Spacing decided: **18×17** (standard Choc), revisit only if a printed test well says otherwise.
+- [ ] **Export STEP + STL** from Cosmos (Download) into this folder — geometry of record for the
+      case + stow CAD; stop depending on the live URL.
 - [ ] Validate scoop depth is shallow enough for the thin-FR-4 necks to reach each facet within
       FR-4 bend tolerance (the whole flex-by-thinness premise depends on a shallow well).
-- [ ] Finalize 2-key thumb position/angle and the outboard pinky key.
-- [ ] Confirm 17×17 vs slightly wider (18) once a printed test well is in hand.
+- [ ] **MCU / LiPo / USB pockets (custom CAD).** Cosmos's auto holder + connector are disabled, so
+      on the exported STEP model: a nice!nano pocket, a LiPo pocket, and a USB-C cutout aligned to
+      the nice!nano's onboard port (no separate connector). Decoupled from the generator on purpose.

@@ -19,11 +19,11 @@ generator and is finished in CAD.
 
 ## Files (to be added)
 
-- `stactyl-cosmos.json` / `stactyl-cosmos-url.txt` — Cosmos config state (reproducible source).
-- `stactyl-cosmos-expert.js` — Expert-mode script (per-key transforms; the bridge to the flat
-  plate).
-- `keywell.step`, `keywell.stl` — exports.
-- `keywell-params.md` — the captured starting parameter set (already here).
+- `stactyl-cosmos-expert.ts` — **present.** Expert-mode config: the per-key transforms, and the
+  reproducible source of the geometry (paste into Cosmos Expert mode to reload). This is the bridge
+  to the flat plate.
+- `keywell-params.md` — **present.** Human-readable rationale + locked-parameter record.
+- `keywell.step`, `keywell.stl` — **pending.** Export from Cosmos → Download.
 
 ## Why Cosmos (vs Dactyl-Manuform / Dometyl)
 

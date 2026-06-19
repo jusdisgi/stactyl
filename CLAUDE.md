@@ -30,7 +30,10 @@ into a minimum-volume stowed stack** for travel.
   PG1316S stack lets the keywell scoop stay shallow, which is what makes the thin-FR-4 plate viable.
 - **Controller: nice!nano (nRF52840), one per half, hand-soldered** (castellated = easy, wide pitch).
   **left = split central** (workspace convention). LiPo per half. TODO: controller + cell pocket
-  placement under the keywell.
+  placement under the keywell. **NB:** the MCU is placed by *us* in custom CAD, **not** by the
+  keywell generator — Cosmos's auto MCU holder + connector are deliberately disabled in the Expert
+  config (didn't fit the tight shell, wrong for a central hand-soldered board, and adds stow bulk).
+  The case exposes the nice!nano's **own USB-C port** for charge/flash — no separate connector.
 - **Wiring: direct-pin — NO diodes, NO matrix.** The `../xiphos` recipe (cradio-derived direct-pin
   shield). 18 keys/half = 18 GPIO, which the nice!nano provides. Drops the diode BOM *and* the
   diode-direction risk that bit the tbkmini build.
@@ -155,16 +158,27 @@ Order the plate at **0.6 mm FR-4** (0.8 mm fallback if 0.6 mm bends too hard for
 
 - [x] Pick dactyl generator + capture the PG1316S parameter set (match TBK Mini columns).
       **Cosmos**; starting params in `cad/keywell-params.md`. 2026-06-18.
-- [ ] Build the Cosmos model from `cad/keywell-params.md`; export STEP + capture Expert per-key
-      transforms; validate scoop is shallow enough for the thin-FR-4 necks.
-- [ ] Design facet/neck pattern for the thin-FR-4 plate; validate per-neck bend angle.
-- [ ] Finalize 2-key thumb cluster + outboard pinky positions.
+- [x] Build the Cosmos model + capture Expert per-key transforms. 2026-06-18. Geometry **locked**:
+      `cad/stactyl-cosmos-expert.ts` is the source of truth (18×17 Choc spacing, tenting 18°,
+      curve 5/15, 18 keys/hand, 1u outboard pinky). **STEP/STL export still pending** (Cosmos →
+      Download → save to `cad/`). Scoop-depth-vs-neck-bend validation still open (below).
+- [ ] Design facet/neck pattern for the thin-FR-4 plate; validate per-neck bend angle. Next big
+      task: translate the Expert per-key transforms into ergogen developed/arc-length plate spacing.
+- [x] Finalize 2-key thumb cluster + outboard pinky positions. 2026-06-18. Curved 2-key thumb;
+      outboard pinky = 1u (custom rounded/tri caps + case clearance to be done in CAD).
 - [x] Controller + wiring: **nice!nano, direct-pin, no diodes** (xiphos recipe). 2026-06-18. Base XIAO
       `C37327670` + matrix noted as a future cost-down / turnkey variant (gated on JLC stock).
-- [ ] Controller + LiPo pocket placement under the keywell.
+- [ ] **Controller + LiPo + USB pocket (custom CAD, decoupled from Cosmos).** Cosmos's auto MCU
+      holder + connector are nulled in the Expert config (didn't fit the tight shell + wrong for our
+      central hand-soldered nice!nano + stow-volume goal). So on the exported STEP we model: a
+      nice!nano pocket, a LiPo pocket, and a USB-C cutout aligned to the nice!nano's onboard port
+      (the board charges/flashes through that port — no separate connector).
 - [ ] Stowed-pose CAD assembly → matched magnet pads + registration; settle rotation/offset.
-- [ ] Firmware: adapt `zmk-config-tbkmini` to the 18/hand transform.
+- [x] Firmware: `zmk-config-stactyl` built 2026-06-18 — cloned from `zmk-config-xiphos` (direct-pin,
+      not the tbkmini matrix), 18/hand, 36-key transform. **Pins are PLACEHOLDER** (inherited from
+      xiphos) until the PCB is routed. Re-derive from the MCU footprint then.
 - [x] Name: **stactyl** (stacks + dactyl). 2026-06-18.
-- [ ] **git:** repo skeleton built (README, .gitignore, footprints/, config.yaml scaffold, cad/),
-      **not yet committed or pushed**. Commands handed to Hunter 2026-06-18 (HTTPS, `jusdisgi/stactyl`).
-      Per workspace policy, **never run git** — Hunter runs them.
+- [ ] **git:** initial skeleton committed + pushed to `jusdisgi/stactyl` 2026-06-18. **New
+      uncommitted work since:** `cad/stactyl-cosmos-expert.ts`, updated `cad/keywell-params.md`,
+      and CLAUDE.md edits — needs a commit. `zmk-config-stactyl` repo: commands handed over, confirm
+      it was pushed. Per workspace policy, **never run git** — Hunter runs them.

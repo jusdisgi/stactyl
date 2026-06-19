@@ -50,9 +50,11 @@ Per hand:  3 rows × 5 columns finger well   = 15
 
 ## Status
 
-Kickoff. Geometry generator chosen (**Cosmos**) and a starting PG1316S parameter set captured;
-keywell, flat-plate facet/neck layout, thumb/pinky placement, stow CAD, and firmware are all
-still to do. See the TODO list in `CLAUDE.md`.
+Early build. Done: generator chosen (**Cosmos**), **keywell geometry locked** (18 keys/hand,
+18×17 Choc spacing, tenting 18°, curve 5/15 — source of truth in `cad/stactyl-cosmos-expert.ts`),
+and the **firmware skeleton** stood up (`../zmk-config-stactyl`, direct-pin, placeholder pins).
+Still to do: STEP/STL export, the flat-plate facet/neck layout, MCU/LiPo/USB pockets, and the stow
+CAD. See the TODO list in `CLAUDE.md`.
 
 ## License
 
