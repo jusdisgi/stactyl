@@ -15,23 +15,22 @@ meta:
 # (keys at row pitch; the strip flexes along the scoop in the gaps BETWEEN
 # switches — no neck-down between rows). Adjacent columns are joined by a single
 # serpentine neck (alternating top/bottom). Everything terminates at a rigid
-# controller root (regular XIAO nRF52840 BLE + power/reset/battery/LED-switch) that folds into the
+# controller root (regular XIAO nRF52840 BLE + power/reset/battery) that folds into the
 # under-keywell pocket. Outboard pinky necks off the pinky strip; the 2-key
 # thumb cluster is its own strip on a serpentine tail off the root.
 #
-# Wiring: ~5x4 matrix (cols C0..C4, rows R0..R3) + one SOD-323 diode/key.
-# Column lines run UP each strip (never cross a neck); row + RGB + 5V/GND are
-# the only nets crossing the necks. RGB: one serial SK6805-1515 (EC15) chain,
-# LED in each switch cutout, snaking the comb (see chain order in the PCB
-# scaffold at the bottom).
+# Wiring: ~5x4 matrix (cols C0..C4, rows R0..R3) + one SOD-323 diode/key. KEYS
+# ONLY — RGB shelved to a future variant (2026-06-23). Column lines run UP each
+# strip (never cross a neck); only the ~4 row lines cross the necks (easy on 2
+# layers now that there's no LED power/data).
 #
 # WHAT'S RUNNABLE HERE: the points (matrix layout: 5 finger columns + outboard
 # pinky + 2 thumbs). The staggers/splays are a STARTING POINT — dial them in
 # ergogen against cad/stactyl-cosmos-expert.ts + a bent test print (the necks
 # absorb the residual, so this does NOT need an exact arc-length unfold).
-# The OUTLINE (strip rects + necks + root) and the PCB section (footprints +
-# LED chain) are scaffolded in comments at the bottom — iterate those in ergogen
-# on Hunter's machine (per workspace memory, generators run there, not sandbox).
+# The OUTLINE (strip rects + necks + root) and the PCB section (footprints) are
+# scaffolded in comments at the bottom — iterate those in ergogen on Hunter's
+# machine (per workspace memory, generators run there, not sandbox).
 # =============================================================================
 
 units:
@@ -258,7 +257,7 @@ outlines:
       size: [10, 20]
       corner: 1
 
-  # Rigid controller ROOT (regular XIAO BLE + power + battery + LED MOSFET). PLACEHOLDER position,
+  # Rigid controller ROOT (regular XIAO BLE + power + battery). PLACEHOLDER position,
   # shown floating below the cluster — move it where it'll fold under the
   # keywell, then connect it to the inner column + thumb with a spine/neck.
   _root:
@@ -289,19 +288,12 @@ outlines:
       operation: add
 
 # =============================================================================
-# PCB — scaffold (footprints; wire in ergogen on Hunter's machine).
-# Model on ../LightFury/config.yaml. Needs:
+# PCB — scaffold (footprints; wire in ergogen on Hunter's machine). KEYS ONLY —
+# RGB (LEDs + LED-switch) is shelved to a future variant; see ../stactyl/CLAUDE.md
+# "Future variant — RGB (shelved)". Model on ../LightFury/config.yaml. Needs:
 #   - key_switches: what=switch_pg1316s, from={{column_net}} to={{colrow}}.
 #   - diodes: diode_smd_sod323f, one per key (SOD-323), tucked beside the switch.
-#   - per_key_leds: SK6805-1515 / EC15 footprint (TO BUILD via kicad2ergogen;
-#     pad order 1=DIN 2=VDD 3=DOUT 4=GND), placed in each switch's center cutout,
-#     P_DIN/P_DOUT = {{key.led_prev}}/{{key.led_next}}, VDD=5V, GND.
 #   - mcu: regular XIAO nRF52840 BLE on the rigid root (confirm the footprint from
-#     ../ergogen-footprints xiao_ble_plus_breakout_holes / util_xiao_ble_plus_*).
+#     ../ergogen-footprints xiao_ble_breakout_holes / util_xiao_ble_cutout*).
 #   - power_switch_smd_side, reset_switch_smd_side, battery connector on the root.
-#
-# RGB CHAIN ORDER (single serial line; assign led_prev/led_next in points to
-# match once wiring): root DIN -> thumb_far -> thumb_home -> inner(bottom->home
-# ->top) -> index(top->home->bottom) -> middle(bottom->home->top) -> ring(top->
-# home->bottom) -> pinky(bottom->home->top) -> outboard_pinky -> (end).
 # =============================================================================
