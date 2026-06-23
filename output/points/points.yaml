@@ -1,0 +1,1488 @@
+finger_inner_bottom:
+    x: 0
+    'y': -2
+    r: 0
+    meta:
+        stagger: -2
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: inner_bottom
+        name: finger_inner_bottom
+        column_net: C4
+        row_net: R2
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C4
+                stagger: stagger_finger_inner
+                splay: splay_finger_inner
+            rows: {}
+            name: inner
+        row: bottom
+        bind:
+            - 10
+            - 10
+            - 0
+            - 0
+finger_inner_home:
+    x: 0
+    'y': 15
+    r: 0
+    meta:
+        stagger: -2
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: inner_home
+        name: finger_inner_home
+        column_net: C4
+        row_net: R1
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C4
+                stagger: stagger_finger_inner
+                splay: splay_finger_inner
+            rows: {}
+            name: inner
+        row: home
+        bind:
+            - 10
+            - 10
+            - 10
+            - 0
+finger_inner_top:
+    x: 0
+    'y': 32
+    r: 0
+    meta:
+        stagger: -2
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: inner_top
+        name: finger_inner_top
+        column_net: C4
+        row_net: R0
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C4
+                stagger: stagger_finger_inner
+                splay: splay_finger_inner
+            rows: {}
+            name: inner
+        row: top
+        bind:
+            - 0
+            - 10
+            - 10
+            - 0
+finger_index_bottom:
+    x: 17
+    'y': -2
+    r: 0
+    meta:
+        stagger: 0
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: index_bottom
+        name: finger_index_bottom
+        column_net: C3
+        row_net: R2
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C3
+                stagger: stagger_finger_index
+                splay: splay_finger_index
+            rows: {}
+            name: index
+        row: bottom
+        bind:
+            - 10
+            - 0
+            - 0
+            - 10
+finger_index_home:
+    x: 17
+    'y': 15
+    r: 0
+    meta:
+        stagger: 0
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: index_home
+        name: finger_index_home
+        column_net: C3
+        row_net: R1
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C3
+                stagger: stagger_finger_index
+                splay: splay_finger_index
+            rows: {}
+            name: index
+        row: home
+        bind:
+            - 10
+            - 10
+            - 10
+            - 10
+finger_index_top:
+    x: 17
+    'y': 32
+    r: 0
+    meta:
+        stagger: 0
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: index_top
+        name: finger_index_top
+        column_net: C3
+        row_net: R0
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C3
+                stagger: stagger_finger_index
+                splay: splay_finger_index
+            rows: {}
+            name: index
+        row: top
+        bind:
+            - 0
+            - 10
+            - 10
+            - 10
+finger_middle_bottom:
+    x: 34
+    'y': 3
+    r: 0
+    meta:
+        stagger: 5
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: middle_bottom
+        name: finger_middle_bottom
+        column_net: C2
+        row_net: R2
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C2
+                stagger: stagger_finger_middle
+                splay: splay_finger_middle
+            rows: {}
+            name: middle
+        row: bottom
+        bind:
+            - 10
+            - 0
+            - 0
+            - 10
+finger_middle_home:
+    x: 34
+    'y': 20
+    r: 0
+    meta:
+        stagger: 5
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: middle_home
+        name: finger_middle_home
+        column_net: C2
+        row_net: R1
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C2
+                stagger: stagger_finger_middle
+                splay: splay_finger_middle
+            rows: {}
+            name: middle
+        row: home
+        bind:
+            - 10
+            - 10
+            - 10
+            - 10
+finger_middle_top:
+    x: 34
+    'y': 37
+    r: 0
+    meta:
+        stagger: 5
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: middle_top
+        name: finger_middle_top
+        column_net: C2
+        row_net: R0
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C2
+                stagger: stagger_finger_middle
+                splay: splay_finger_middle
+            rows: {}
+            name: middle
+        row: top
+        bind:
+            - 0
+            - 10
+            - 10
+            - 0
+finger_ring_bottom:
+    x: 51
+    'y': 6
+    r: 0
+    meta:
+        stagger: 3
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: ring_bottom
+        name: finger_ring_bottom
+        column_net: C1
+        row_net: R2
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C1
+                stagger: stagger_finger_ring
+                splay: splay_finger_ring
+            rows: {}
+            name: ring
+        row: bottom
+        bind:
+            - 10
+            - 10
+            - 0
+            - 10
+finger_ring_home:
+    x: 51
+    'y': 23
+    r: 0
+    meta:
+        stagger: 3
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: ring_home
+        name: finger_ring_home
+        column_net: C1
+        row_net: R1
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C1
+                stagger: stagger_finger_ring
+                splay: splay_finger_ring
+            rows: {}
+            name: ring
+        row: home
+        bind:
+            - 10
+            - 10
+            - 10
+            - 10
+finger_ring_top:
+    x: 51
+    'y': 40
+    r: 0
+    meta:
+        stagger: 3
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: ring_top
+        name: finger_ring_top
+        column_net: C1
+        row_net: R0
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C1
+                stagger: stagger_finger_ring
+                splay: splay_finger_ring
+            rows: {}
+            name: ring
+        row: top
+        bind:
+            - 0
+            - 0
+            - 10
+            - 0
+finger_pinky_bottom:
+    x: 68
+    'y': 2
+    r: 0
+    meta:
+        stagger: -4
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: pinky_bottom
+        name: finger_pinky_bottom
+        column_net: C0
+        row_net: R2
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C0
+                stagger: stagger_finger_pinky
+                splay: splay_finger_pinky
+            rows: {}
+            name: pinky
+        row: bottom
+        bind:
+            - 10
+            - 0
+            - 0
+            - 0
+finger_pinky_home:
+    x: 68
+    'y': 19
+    r: 0
+    meta:
+        stagger: -4
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: pinky_home
+        name: finger_pinky_home
+        column_net: C0
+        row_net: R1
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C0
+                stagger: stagger_finger_pinky
+                splay: splay_finger_pinky
+            rows: {}
+            name: pinky
+        row: home
+        bind:
+            - 10
+            - 0
+            - 10
+            - 10
+finger_pinky_top:
+    x: 68
+    'y': 36
+    r: 0
+    meta:
+        stagger: -4
+        spread: 17
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 17
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: pinky_top
+        name: finger_pinky_top
+        column_net: C0
+        row_net: R0
+        zone:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                    rows: {}
+                    name: inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                    rows: {}
+                    name: index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                    rows: {}
+                    name: middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                    rows: {}
+                    name: ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+                    rows: {}
+                    name: pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+            name: finger
+        col:
+            key:
+                column_net: C0
+                stagger: stagger_finger_pinky
+                splay: splay_finger_pinky
+            rows: {}
+            name: pinky
+        row: top
+        bind:
+            - 0
+            - 0
+            - 10
+            - 10
+pinky_out_out_mid:
+    x: 85
+    'y': 19
+    r: -15
+    meta:
+        stagger: 0
+        spread: 19
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: -15
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 19
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: out_mid
+        name: pinky_out_out_mid
+        column_net: C0
+        row_net: R3
+        zone:
+            key:
+                column_net: C0
+                row_net: R3
+                rotate: -15
+            columns:
+                out: null
+            rows:
+                mid: {}
+            name: pinky_out
+        col:
+            rows: {}
+            key: {}
+            name: out
+        row: mid
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+thumb_home_fan:
+    x: 21
+    'y': -24
+    r: -20
+    meta:
+        stagger: 0
+        spread: 18
+        splay: 0
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 18
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: home_fan
+        name: thumb_home_fan
+        column_net: C2
+        row_net: R3
+        zone:
+            key:
+                padding: ks + 1
+                spread: ks + 1
+            columns:
+                home:
+                    key:
+                        column_net: C2
+                        row_net: R3
+                    rows: {}
+                    name: home
+                far:
+                    key:
+                        column_net: C3
+                        row_net: R3
+                        splay: -18
+                    rows: {}
+                    name: far
+            rows:
+                fan: {}
+            name: thumb
+        col:
+            key:
+                column_net: C2
+                row_net: R3
+            rows: {}
+            name: home
+        row: fan
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0
+thumb_far_fan:
+    x: 37.914467200000004
+    'y': -30.1563626
+    r: -38
+    meta:
+        stagger: 0
+        spread: 18
+        splay: -18
+        origin:
+            - 0
+            - 0
+        orient: 0
+        shift:
+            - 0
+            - 0
+        rotate: 0
+        adjust: {}
+        width: 18
+        height: 18
+        padding: 18
+        autobind: 10
+        skip: false
+        asym: both
+        colrow: far_fan
+        name: thumb_far_fan
+        column_net: C3
+        row_net: R3
+        zone:
+            key:
+                padding: ks + 1
+                spread: ks + 1
+            columns:
+                home:
+                    key:
+                        column_net: C2
+                        row_net: R3
+                    rows: {}
+                    name: home
+                far:
+                    key:
+                        column_net: C3
+                        row_net: R3
+                        splay: -18
+                    rows: {}
+                    name: far
+            rows:
+                fan: {}
+            name: thumb
+        col:
+            key:
+                column_net: C3
+                row_net: R3
+                splay: -18
+            rows: {}
+            name: far
+        row: fan
+        bind:
+            - 0
+            - 0
+            - 0
+            - 0

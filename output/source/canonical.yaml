@@ -1,0 +1,107 @@
+meta:
+    engine: 4.1.0
+    name: stactyl
+    version: 0.2
+    ref: stactyl v0.2
+    author: huntercook
+    url: 'https://github.com/jusdisgi/stactyl'
+    footprint: switch_pg1316s
+units:
+    kx: 16
+    ky: 16
+    ks: 17
+    kp: 17
+    kcow: 16
+    kcoh: 16
+    keycw: 16
+    keych: 16
+    signal_trace_width: 0.2
+    pwr_trace_width: 0.25
+    gnd_trace_width: 0.25
+    via_size: 0.5
+    via_drill: 0.3
+    stagger_finger_pinky: -4
+    stagger_finger_ring: 3
+    stagger_finger_middle: 5
+    stagger_finger_index: 0
+    stagger_finger_inner: -2
+    splay_finger_pinky: 0
+    splay_finger_ring: 0
+    splay_finger_middle: 0
+    splay_finger_index: 0
+    splay_finger_inner: 0
+points:
+    zones:
+        finger:
+            key:
+                padding: kp
+                spread: ks
+            columns:
+                inner:
+                    key:
+                        column_net: C4
+                        stagger: stagger_finger_inner
+                        splay: splay_finger_inner
+                index:
+                    key:
+                        column_net: C3
+                        stagger: stagger_finger_index
+                        splay: splay_finger_index
+                middle:
+                    key:
+                        column_net: C2
+                        stagger: stagger_finger_middle
+                        splay: splay_finger_middle
+                ring:
+                    key:
+                        column_net: C1
+                        stagger: stagger_finger_ring
+                        splay: splay_finger_ring
+                pinky:
+                    key:
+                        column_net: C0
+                        stagger: stagger_finger_pinky
+                        splay: splay_finger_pinky
+            rows:
+                bottom:
+                    row_net: R2
+                home:
+                    row_net: R1
+                top:
+                    row_net: R0
+        pinky_out:
+            anchor:
+                ref: finger_pinky_home
+                shift:
+                    - ks
+                    - 0
+            key:
+                column_net: C0
+                row_net: R3
+                rotate: -15
+            columns:
+                out: null
+            rows:
+                mid: null
+        thumb:
+            anchor:
+                ref: finger_index_bottom
+                shift:
+                    - 4
+                    - '-ky - 6'
+                rotate: -20
+            key:
+                padding: ks + 1
+                spread: ks + 1
+            columns:
+                home:
+                    key:
+                        column_net: C2
+                        row_net: R3
+                far:
+                    key:
+                        column_net: C3
+                        row_net: R3
+                        splay: -18
+            rows:
+                fan: null

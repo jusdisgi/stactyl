@@ -1,8 +1,9 @@
 // stactyl — Cosmos Expert-mode config (per-key transforms).
 // Source of truth for the keywell geometry. Captured from the Cosmos
 // configurator 2026-06-18 (Hunter's session); edited 2026-06-18 (pinky -> 1u,
-// finger spacing -> 18x17). This is the bridge data used to derive the ergogen
-// flat-plate developed/arc-length facet spacing.
+// finger spacing -> 18x17). This is the bridge data informing the ergogen
+// per-column comb staggers (BastardKB-style comb, not a developed grid; the
+// serpentine necks absorb the curvature when bent — no arc-length unfold).
 //
 // Key parameters (see ./keywell-params.md):
 //   - keyBasis: "choc"  (PG1316S proxy; switches retained by the printed plate)
@@ -14,11 +15,12 @@
 //        1u, rotated 90deg) + 2 thumbs. (Pinky was aspect 1.5; set to 1u
 //        2026-06-18 — custom rounded/tri caps + case clearance done later in CAD.)
 //   - shell: tilt 7.2; wrist rests defined (likely drop for a portable board).
-//   - microcontroller: null, connectors: [] (set 2026-06-18). Cosmos's auto
-//        nice!nano holder didn't fit the tighter 18x17 shell; we place the
-//        controller + LiPo in custom pockets under the keywell in CAD anyway (per
-//        the brief). NB: connectors must be [] not null — Cosmos reads .length on
-//        it and crashes on null. Re-enable the holder only if you want it back.
+//   - microcontroller: null, connectors: [] (set 2026-06-18). Cosmos's auto MCU
+//        holder didn't fit the tighter 18x17 shell; we place the controller
+//        (XIAO nRF52840 Plus as of the 2026-06-22 reorientation) + LiPo in custom
+//        pockets under the keywell in CAD anyway (per the brief). NB: connectors
+//        must be [] not null — Cosmos reads .length on it and crashes on null.
+//        Re-enable the holder only if you want it back.
 //
 // NOTE: a 0.5 column index in Cosmos = the matrix is centered between columns;
 // left/right use mirrored signs. The pinky column carries an extra translate

@@ -23,10 +23,12 @@ generator and is finished in CAD.
   reproducible source of the geometry (paste into Cosmos Expert mode to reload). This is the bridge
   to the flat plate.
 - `keywell-params.md` — **present.** Human-readable rationale + locked-parameter record.
-- `keywell.step`, `keywell.stl` — **pending.** Export from Cosmos → Download.
+- `stactylleft.step` / `stactylright.step` — **present** (exported from Cosmos 2026-06-19). The
+  keywell solids for the stow CAD + case.
+- `stactyl-case*/stactyl-plate*.stl` — **present** (quick-print meshes: case halves + plate top/bottom).
 
 ## Why Cosmos (vs Dactyl-Manuform / Dometyl)
 
 Clean **STEP** export for the stow CAD + magnet-pad booleans; **Expert-mode per-key transforms**
-to derive the flat-plate facet layout; native low-profile switch support; actively maintained web
+to inform the per-column comb staggers for the flat plate; native low-profile switch support; actively maintained web
 tool, no OpenSCAD/opam toolchain to stand up. Decided 2026-06-18.
