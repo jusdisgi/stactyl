@@ -17,7 +17,7 @@
 //   - shell: tilt 7.2; wrist rests defined (likely drop for a portable board).
 //   - microcontroller: null, connectors: [] (set 2026-06-18). Cosmos's auto MCU
 //        holder didn't fit the tighter 18x17 shell; we place the controller
-//        (XIAO nRF52840 Plus as of the 2026-06-22 reorientation) + LiPo in custom
+//        (regular XIAO nRF52840 BLE as of the 2026-06-23 reorientation) + LiPo in custom
 //        pockets under the keywell in CAD anyway (per the brief). NB: connectors
 //        must be [] not null — Cosmos reads .length on it and crashes on null.
 //        Re-enable the holder only if you want it back.

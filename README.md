@@ -7,16 +7,18 @@ stactyl reuses the **3D column geometry of the BastardKB TBK Mini** (a Dactyl Ma
 is a clean, fresh design built around:
 
 - **36 keys** — 3×5 finger matrix + 1 outboard pinky + 2 thumbs, **per hand** (18/hand).
-- **Kailh PG1316S** ultra-low-profile switches (consigned at Seeed Fusion, `C9900170245`).
-- **XIAO nRF52840 Plus per half, matrix wiring + diodes** (the `tbkmini` recipe). Left half = split
-  central. **Fully assembled (turnkey) at Seeed Fusion** — XIAO is Seeed's catalog part, so no DNP
-  and no hand-soldering.
+- **Kailh PG1316S** ultra-low-profile switches (consigned at JLCPCB, `C9900170245`).
+- **Regular XIAO nRF52840 BLE per half, matrix wiring + diodes** (the `tbkmini` recipe). Left half =
+  split central. **Fully assembled (turnkey) at JLCPCB** — JLC places the XIAO from stock
+  (`C17209540`), so no DNP and no hand-soldering. (Not the Plus — the matrix fits the regular XIAO's
+  11 GPIO: 9 matrix + 1 RGB data + 1 LED-rail enable.)
 - **Per-key + underglow addressable RGB** — **SK6805-1515 (EC15)**, `C2890035` (machine-placed,
   top-side in the switch center cutout per LightFury; single-wire, runs off LiPo with no boost; the
-  5 mA / 1.5×1.5 mm low-power variant, chosen for battery life + strip space).
+  5 mA / 1.5×1.5 mm low-power variant, chosen for battery life + strip space). LED rail gated by a
+  **P-ch MOSFET (AO3401A, `C15127`)** off ZMK `ext-power` so it draws nothing when idle.
 - A **thin rigid FR-4 "flex-by-thinness" plate**, built as a **BastardKB-style per-column comb**:
   each finger column is one full-width strip, columns joined by single serpentine necks, terminating
-  at a rigid controller root (XIAO Plus) that folds into the keywell pocket. PCBA'd flat, then bent
+  at a rigid controller root (regular XIAO BLE) that folds into the keywell pocket. PCBA'd flat, then bent
   into the printed keywell. Standard rigid PCBA pipeline — no rigid-flex, no polyimide, no grid.
 - A **printed 3D keywell** (from the **Cosmos** generator → STEP) that retains the switches and
   carries the formed plate.
@@ -60,17 +62,18 @@ Early build. Done: generator chosen (**Cosmos**), **keywell geometry locked** (1
 18×17 Choc spacing, tenting 18°, curve 5/15 — source of truth in `cad/stactyl-cosmos-expert.ts`),
 and a **firmware skeleton** stood up (`../zmk-config-stactyl`).
 
-**Reoriented 2026-06-22:** controller **nice!nano → XIAO nRF52840 Plus**, fab **JLC DNP → Seeed
-Fusion turnkey**, wiring **direct-pin → matrix + diodes**, and **per-key + underglow RGB added**.
-Geometry and the flex-plate concept are unchanged. The firmware skeleton (cloned from xiphos,
-direct-pin) now needs re-basing on the tbkmini matrix shield + `xiao_ble//zmk`.
+**Reoriented 2026-06-22, amended 2026-06-23:** controller **nice!nano → regular XIAO nRF52840 BLE**,
+fab **JLC DNP → JLC turnkey** (fully assembled — JLC places the XIAO), wiring **direct-pin → matrix +
+diodes**, **per-key + underglow RGB added** (SK6805-1515 + AO3401A LED switch). The brief Seeed +
+XIAO-Plus detour is reversed (matrix fits the regular XIAO's 11 GPIO; JLC is cheaper + in stock).
+Geometry and the flex-plate concept are unchanged.
 
-STEP/STL export is **done** (`cad/*.step`/`.stl`); the comb `config.yaml` points are stood up. Still
-to do, roughly in order: firmware retarget; dial the comb column staggers + build the ergogen
-**outline** (column strips + serpentine necks + rigid root); footprints (XIAO Plus, SK6805-1515);
-**the actual PCB — KiCad layout + matrix/RGB routing, both halves on one board, schematic sync, then
-KiKit panelization**; MCU/LiPo/USB pockets + the stow CAD; the RGB chain topology / battery details;
-and a Seeed Fusion quote + all-SMD BOM audit. See the TODO list in `CLAUDE.md`.
+STEP/STL export is **done**; the comb `config.yaml` points are stood up; the **firmware retarget is
+done** (matrix on `xiao_ble//zmk`, builds green). Still to do, roughly in order: dial the comb column
+staggers + finish the ergogen **outline** (column strips + serpentine necks + rigid root); footprints
+(regular XIAO, SK6805-1515, AO3401A); **the actual PCB — KiCad layout + matrix/RGB routing, both
+halves on one board, schematic sync, then KiKit panelization**; MCU/LiPo/USB pockets + stow CAD; RGB
+chain + ext-power; and a JLC BOM audit. See the TODO list in `CLAUDE.md`.
 
 ## License
 

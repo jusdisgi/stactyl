@@ -15,7 +15,7 @@ meta:
 # (keys at row pitch; the strip flexes along the scoop in the gaps BETWEEN
 # switches — no neck-down between rows). Adjacent columns are joined by a single
 # serpentine neck (alternating top/bottom). Everything terminates at a rigid
-# controller root (XIAO nRF52840 Plus + power/reset/battery) that folds into the
+# controller root (regular XIAO nRF52840 BLE + power/reset/battery/LED-switch) that folds into the
 # under-keywell pocket. Outboard pinky necks off the pinky strip; the 2-key
 # thumb cluster is its own strip on a serpentine tail off the root.
 #
@@ -67,6 +67,14 @@ units:
   splay_finger_middle: 0
   splay_finger_index: 0
   splay_finger_inner: 0
+
+  # --- comb OUTLINE knobs (tune these, re-run ergogen, view output/outlines/) ---
+  strip_w: 15.5   # key-PAD width (min ~14.7 = PG1316S land).
+  pad_h: 14       # key-pad height (< kp=17 so the board pinches between keys = relief).
+  spine_w: 5      # narrow backbone width between keys (the in-column flex zone).
+  strip_h: 52     # spine height: covers all 3 rows (2*17 + one key).
+  neck_l: 15      # inter-column neck length — spans the WIDE spine-to-spine gap (~12mm).
+  neck_w: 10      # inter-column neck height (tall enough to bridge a column stagger step).
 
 points:
   zones:
@@ -133,40 +141,152 @@ points:
     # splay are a STARTING POINT — set the real angle from the Cosmos thumb
     # transforms (cad/stactyl-cosmos-expert.ts, leftThumbsPlane/rightThumbsPlane).
     thumb:
+      # RIGHT-hand thumb. It sits below the INNER column and reaches OUTBOARD =
+      # further LEFT (toward -x), NOT rightward toward the fingers (the bug).
+      #   tucky (home): just outboard of the inner column
+      #   reachy (far): well past any finger key, lower-left of tucky
+      # Placed explicitly off finger_inner_bottom (spread: 0 + per-key shift).
+      # Tilts match the Cosmos z-rotations (~ -10 / -17). If the tilt direction
+      # looks wrong now that the POSITIONS are right, just flip both rotate signs.
       anchor:
-        ref: finger_index_bottom
-        shift: [4, -ky - 6]
-        rotate: -20
+        ref: finger_inner_bottom
       key:
         padding: ks + 1
-        spread: ks + 1
+        spread: 0
       columns:
-        home:
+        home:                        # tucky / home thumb
           key:
             column_net: C2
             row_net: R3
-        far:
+            shift: [-2, -ky - 4]     # ~ (-2, -24): just below-outboard of inner
+            rotate: 10               # CCW: slopes down-and-away from the fingers (matches Cosmos)
+        far:                         # reachy thumb
           key:
             column_net: C3
             row_net: R3
-            splay: -18
+            shift: [-20, -ky - 10]   # ~ (-20, -30): well past the inner column, left + down
+            rotate: 17
       rows:
         fan:
 
-# =============================================================================
-# OUTLINE — scaffold (build/iterate in ergogen on Hunter's machine).
-# The comb is NOT a single rounded outline. Build it as:
-#   - one rounded-rect strip per finger column wrapping its 3 keys (full width,
-#     ~ a switch body + margin), 0.6 mm FR-4;
-#   - a small serpentine neck between each adjacent column pair, alternating the
-#     top vs bottom edge down the hand (see CLAUDE.md);
-#   - a stub off the pinky strip for the outboard pinky;
-#   - a rigid root rectangle at the proximal edge (XIAO Plus + power + battery),
-#     with a serpentine tail to the thumb strip and a neck up to the inner col;
-#   - subtract switch/LED cutouts as the footprints define them.
-# Necks should be drawn as explicit polygons, not auto-hull, so their width +
-# serpentine shape are controlled for bend tolerance.
-# =============================================================================
+outlines:
+  # ---------------------------------------------------------------------------
+  # COMB OUTLINE with BK-style flex relief. The board is WIDE at each switch and
+  # PINCHED between switches (so a column can bend), and the inter-column bridges
+  # sit in the pinched zones where the gap is wide (~12mm) so they have length to
+  # flex. Built from: wide key pads + a narrow per-column spine + long necks.
+  # Tune the *_w / *_h / neck_* / spine_w units above. (Claude can't render — so
+  # render output/outlines/board.svg and we iterate.)
+  # ---------------------------------------------------------------------------
+
+  # Wide key-pad at EVERY switch (fingers + thumb + outboard, each at its own
+  # rotation). `where: true` = all points; this also supplies the thumb and
+  # outboard pads, so they don't need separate definitions.
+  _pads:
+    - what: rectangle
+      where: true
+      size: [strip_w, pad_h]
+      corner: 1.5
+
+  # Narrow backbone per finger column (home-anchored, exact names), tall enough
+  # to span all 3 keys. BETWEEN keys only this spine remains -> the column
+  # pinches there and can flex. The wide pads sit on top at each key.
+  _col_spines:
+    - what: rectangle
+      where: "finger_inner_home"
+      size: [spine_w, strip_h]
+    - what: rectangle
+      where: "finger_index_home"
+      size: [spine_w, strip_h]
+      operation: add
+    - what: rectangle
+      where: "finger_middle_home"
+      size: [spine_w, strip_h]
+      operation: add
+    - what: rectangle
+      where: "finger_ring_home"
+      size: [spine_w, strip_h]
+      operation: add
+    - what: rectangle
+      where: "finger_pinky_home"
+      size: [spine_w, strip_h]
+      operation: add
+
+  # Inter-column necks: bridge adjacent column SPINES in the PINCHED zones
+  # (between keys), where the spine-to-spine gap is ~12mm -> long, flexible necks
+  # (the old ones spanned 1.5mm and were rigid). Alternating up/down. neck_w is
+  # tall to bridge the column stagger step; nudge the shift y to sit each neck in
+  # the relief gap of its two columns.
+  _col_necks:
+    - what: rectangle
+      where: "finger_inner_home"
+      adjust: {shift: [8.5, 8.5]}     # inner <-> index, UPPER relief (between home & top)
+      size: [neck_l, neck_w]
+      corner: 1
+    - what: rectangle
+      where: "finger_index_home"
+      adjust: {shift: [8.5, -8.5]}    # index <-> middle, LOWER relief (between bottom & home)
+      size: [neck_l, neck_w]
+      corner: 1
+      operation: add
+    - what: rectangle
+      where: "finger_middle_home"
+      adjust: {shift: [8.5, 8.5]}     # middle <-> ring, UPPER
+      size: [neck_l, neck_w]
+      corner: 1
+      operation: add
+    - what: rectangle
+      where: "finger_ring_home"
+      adjust: {shift: [8.5, -8.5]}    # ring <-> pinky, LOWER
+      size: [neck_l, neck_w]
+      corner: 1
+      operation: add
+
+  # Outboard pinky neck (pinky spine -> outboard pad).
+  _outboard_neck:
+    - what: rectangle
+      where: "finger_pinky_home"
+      adjust: {shift: [9, 0]}
+      size: [neck_l, neck_w]
+      corner: 1
+
+  # Thumb neck (inner column -> thumb cluster).
+  _thumb_neck:
+    - what: rectangle
+      where: "finger_inner_bottom"
+      adjust: {shift: [-1, -11]}      # inner column <-> thumb (tune)
+      size: [10, 20]
+      corner: 1
+
+  # Rigid controller ROOT (regular XIAO BLE + power + battery + LED MOSFET). PLACEHOLDER position,
+  # shown floating below the cluster — move it where it'll fold under the
+  # keywell, then connect it to the inner column + thumb with a spine/neck.
+  _root:
+    - what: rectangle
+      where: "finger_middle_home"
+      adjust: {shift: [0, -66]}
+      size: [95, 24]
+      corner: 2
+
+  # Exported board = union of everything (this becomes Edge.Cuts).
+  board:
+    - what: outline
+      name: _pads
+    - what: outline
+      name: _col_spines
+      operation: add
+    - what: outline
+      name: _col_necks
+      operation: add
+    - what: outline
+      name: _outboard_neck
+      operation: add
+    - what: outline
+      name: _thumb_neck
+      operation: add
+    - what: outline
+      name: _root
+      operation: add
 
 # =============================================================================
 # PCB — scaffold (footprints; wire in ergogen on Hunter's machine).
@@ -176,7 +296,7 @@ points:
 #   - per_key_leds: SK6805-1515 / EC15 footprint (TO BUILD via kicad2ergogen;
 #     pad order 1=DIN 2=VDD 3=DOUT 4=GND), placed in each switch's center cutout,
 #     P_DIN/P_DOUT = {{key.led_prev}}/{{key.led_next}}, VDD=5V, GND.
-#   - mcu: XIAO nRF52840 Plus on the rigid root (confirm the footprint from
+#   - mcu: regular XIAO nRF52840 BLE on the rigid root (confirm the footprint from
 #     ../ergogen-footprints xiao_ble_plus_breakout_holes / util_xiao_ble_plus_*).
 #   - power_switch_smd_side, reset_switch_smd_side, battery connector on the root.
 #

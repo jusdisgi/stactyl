@@ -92,7 +92,7 @@ keys. Exact position/angle still open.
       inter-column necks to reach, within FR-4 bend tolerance (the flex-by-thinness premise depends
       on a shallow well).
 - [ ] **MCU / LiPo / USB pockets (custom CAD).** Cosmos's auto holder + connector are disabled, so
-      on the exported STEP model: a **XIAO nRF52840 Plus** pocket (smaller than a nice!nano — easier
+      on the exported STEP model: a **regular XIAO nRF52840 BLE** pocket (smaller than a nice!nano — easier
       on the tight shell + stow volume), a LiPo pocket, and a USB-C cutout aligned to the **XIAO's**
       onboard port (no separate connector). Decoupled from the generator on purpose.
-      *(Controller reoriented nice!nano → XIAO Plus on 2026-06-22; see `../CLAUDE.md`.)*
+      *(Controller: nice!nano → regular XIAO nRF52840 BLE, finalized 2026-06-23; see `../CLAUDE.md`.)*

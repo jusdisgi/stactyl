@@ -4,12 +4,17 @@ Notes for future sessions. Workspace-wide conventions live in `../CLAUDE.md`; th
 what's specific to **stactyl**. Keep it thin. This is a **design brief / kickoff** — nothing is built
 yet. Core decisions were settled with Hunter on 2026-06-18; open items are marked TODO.
 
-> **Reorientation 2026-06-22.** Three foundational decisions flipped after the Planck-C75 thread
-> worked out a **fully-assembled (turnkey) path at Seeed Fusion**: controller **nice!nano → XIAO
-> nRF52840 Plus**, fab/assembly **JLCPCB DNP-and-hand-solder → Seeed Fusion machine-assembled**, and
-> wiring **direct-pin → matrix + diodes**. RGB was also added (**per-key + underglow**). The geometry
-> (Cosmos keywell, 18 keys/hand) and the thin-FR-4 flex-plate concept are **unchanged**. Sections
-> below reflect the reorientation; see "Why XIAO Plus + Seeed" for the rationale.
+> **Reorientation 2026-06-22, amended 2026-06-23.** The 2026-06-22 pass flipped: controller
+> **nice!nano → XIAO nRF52840**, wiring **direct-pin → matrix + diodes**, and added **per-key +
+> underglow RGB**. It *also* routed through a **Seeed Fusion turnkey + XIAO Plus** plan — **that part is
+> REVERSED as of 2026-06-23**:
+> - **Controller = regular XIAO nRF52840 BLE** (not the Plus). The matrix needs only ~9 GPIO, so the
+>   regular XIAO's 11 GPIO suffice — the Plus was only ever for the abandoned direct-pin's 18 pins.
+> - **Fab/assembly = JLCPCB turnkey** (not Seeed). JLC turnkey-places the regular XIAO from stock
+>   (`C17209540`, pre-order, **MOQ 1**, ~$16); the Plus is reel-only (~$4k) and Seeed quoted >2× JLC.
+>   PG1316S consignment stays at **JLC** (back to Hunter's normal flow).
+> The geometry (Cosmos keywell, 18 keys/hand) and the thin-FR-4 flex-plate concept are **unchanged**.
+> See "Why regular XIAO + JLC" for the rationale.
 
 ## What this is
 
@@ -32,26 +37,27 @@ into a minimum-volume stowed stack** for travel.
 
 ## Switches & controller
 
-- **Kailh PG1316S** ultra-low-profile, **consigned at Seeed Fusion** (`C9900170245`, Hunter's reel —
-  consignment relationship moves from JLC to Seeed for this board; see Production).
+- **Kailh PG1316S** ultra-low-profile, **consigned at JLCPCB** (`C9900170245`, Hunter's reel — his
+  normal flow; see Production).
 - Switch retention is by the **printed keywell plate**, not the PCB (see PCB approach) — the low
   PG1316S stack lets the keywell scoop stay shallow, which is what makes the thin-FR-4 plate viable.
-- **Controller: XIAO nRF52840 Plus, one per half, machine-reflowed at Seeed** (castellated SMD-down,
-  including the back-side pads the Plus adds). **left = split central** (workspace convention). LiPo
-  per half. The Plus is **Seeed's own catalog part**, so it's placed turnkey — *not* DNP, *not*
-  hand-soldered. Direct-soldered permanence is fine (Hunter direct-solders MCUs anyway). TODO:
-  controller + cell pocket placement under the keywell. **NB:** the MCU is placed by *us* in custom
-  CAD, **not** by the keywell generator — Cosmos's auto MCU holder + connector are deliberately
-  disabled in the Expert config (didn't fit the tight shell, adds stow bulk). The case exposes the
-  XIAO's **own USB-C port** for charge/flash — no separate connector. (XIAO is much smaller than a
-  nice!nano — a win for the tight shell and stow volume.)
-- **Wiring: matrix + diodes** (machine-placed at Seeed). A ~5×4 matrix per half = ~9 GPIO + one
-  SOD-323 diode per key. Chosen over direct-pin specifically because the thin-FR-4 **necks** carry
-  far fewer converging traces in a matrix than direct-pin's ~18 (see PCB approach), and turnkey
-  assembly removes direct-pin's only real advantages — the diode BOM and the diode-direction risk
-  that bit the tbkmini hand-build are both non-issues when a pick-and-place sets diodes in the
-  footprint orientation. Frees ~10 GPIO for RGB data + headroom. Firmware base flips to the
+- **Controller: regular XIAO nRF52840 BLE, one per half, JLC turnkey-placed** (`C17209540`, pre-order,
+  MOQ 1, ~$16 — JLC sources + places it from stock). **left = split central** (workspace convention).
+  LiPo per half. **NOT the Plus** — the matrix only needs ~9 GPIO, so the regular XIAO's 11 are enough
+  (the Plus was a direct-pin-era idea; see "Why regular XIAO + JLC"). TODO: controller + cell pocket
+  placement under the keywell. **NB:** the MCU is placed by *us* in custom CAD, **not** by the keywell
+  generator — Cosmos's auto MCU holder + connector are deliberately disabled in the Expert config
+  (didn't fit the tight shell, adds stow bulk). The case exposes the XIAO's **own USB-C port** for
+  charge/flash — no separate connector. (XIAO is much smaller than a nice!nano — a win for the tight
+  shell and stow volume.)
+- **Wiring: matrix + diodes.** A **5×4 matrix per half = 9 GPIO** (5 cols + 4 rows) + one SOD-323
+  diode per key. Chosen over direct-pin specifically because the thin-FR-4 **necks** carry far fewer
+  converging traces in a matrix than direct-pin's ~18 (see PCB approach), and turnkey assembly makes
+  the diode BOM + diode-direction (which bit the tbkmini hand-build) non-issues. Firmware base is the
   `../zmk-config-tbkmini` matrix shield (not xiphos's direct-pin).
+- **Pin budget (regular XIAO, 11 GPIO, exactly full):** 9 matrix + **1 RGB data** + **1 LED-rail
+  enable** (see RGB) = 11. No spare, but it fits. (TOTEM proves a 36-key matrix split on the regular
+  xiao_ble.)
 - **RGB: per-key + underglow addressable LEDs — part LOCKED 2026-06-22 = SK6805-1515 (EC15)**, LCSC/JLC
   `C2890035` (OPSCO). **Mounted top-side in the switch's center cutout, single-sided — exactly the
   LightFury pattern** (LightFury places a 4-pad 2020 in the PG1316S cutout; see its `config.yaml`
@@ -63,35 +69,43 @@ into a minimum-volume stowed stack** for travel.
   penalty on a wireless nRF board. Trade-off: lower current = dimmer, fine for the in-cutout glow we want
   (SC caps are opaque; per-key reads as a halo around the cap, not backlit legends). **Footprint note:**
   EC15 pad order is **1=DIN, 2=VDD, 3=DOUT, 4=GND** — differs from the 2020, so use an EC15-matched
-  footprint, don't blindly reuse LightFury's 2020 pad mapping. **Seeed-supply check:** `C2890035` is a
-  JLC/LCSC catalog part — confirm it's in Seeed's catalog or plan to consign it (JLC stock ≠ Seeed stock).
-  No encoder, no trackball.
+  footprint, don't blindly reuse LightFury's 2020 pad mapping. `C2890035` is a JLC catalog part (turnkey,
+  no consignment). No encoder, no trackball.
+- **LED-rail power switch (idle-draw kill).** A proper **high-side switch** gates power to the whole
+  SK6805 chain so the LEDs draw **zero** when off (addressable LEDs sink quiescent current even
+  "off"). WalkThePlanck's refined two-FET circuit (mirror it):
+  - **Q1 = AO3401A** — P-ch high-side switch on the LED rail. `C15127`, JLC **Basic** (no
+    extended-part fee; cheaper in practice than the Extended FS3401M `C2936839` once the ~$3/part
+    loading fee counts).
+  - **Q2 = 2N7002** — N-ch gate **driver**. A 3.3 V GPIO can't pull Q1's gate up to the LiPo rail to
+    turn it *off* (gate must reach ~V_rail), so Q2 level-shifts: GPIO drives Q2, Q2 pulls Q1's gate to
+    GND. JLC Basic SOT-23 (likely `C8545` — confirm at BOM time).
+  - **R1 = 10k** Q1 gate pull-up to the rail (default OFF); **R3 = 10k** Q2 gate pull-down (stays OFF
+    while the GPIO floats/boots). Two 10k 0402s.
+  - Behavior: **GPIO high → LEDs on** (Q2 on → Q1 gate low → Q1 on); GPIO low/floating → rail dead.
+  - Driven by the **11th GPIO** via ZMK's **`ext-power`** node (active-high enable; ZMK cuts the rail
+    on idle/sleep). Q1's huge margin (~4 A) dwarfs the ~0.3 A LED rail.
+  - *(Related but separate: **R2 = 330R 0402** = SK6805 data-line series resistor — RGB support, not
+    the gate.)*
 
-### Why XIAO Plus + Seeed (reorientation 2026-06-22; supersedes the 2026-06-18 nice!nano choice)
+### Why regular XIAO + JLC (2026-06-23; supersedes the brief 2026-06-22 "XIAO Plus + Seeed" detour)
 
-The 2026-06-18 design picked nice!nano + JLC + direct-pin and **rejected the XIAO Plus** for two
-reasons: (1) the Plus's extra GPIO sit on back-side pads needing **reflow**, not iron-friendly, and
-(2) JLC would only **consign** the XIAO. The Planck-C75 thread found the path that dissolves both:
-**fully-assembled (turnkey) at Seeed Fusion.**
+For ~a day the plan was XIAO **Plus** assembled at **Seeed Fusion**. Two things collapsed that:
 
-- **Reflow objection → gone.** Machine reflow at Seeed is exactly what the back-side castellated pads
-  want; that's the assembly house's job, not a hand-soldering chore.
-- **Consignment objection → gone.** The XIAO is **Seeed's own catalog part**, so there's **zero MCU
-  consignment** — Seeed already stocks and places it. We consign only the PG1316S reel.
-- **GPIO.** The Plus breaks out ~19 usable GPIO. A ~5×4 matrix needs only ~9, leaving ample headroom
-  (RGB data, future features). (Direct-pin's 18 would also fit, but matrix routes the necks better —
-  see PCB approach — and turnkey assembly makes the diodes free, so matrix wins outright now.)
-- **Net:** the design the old notes filed as a "future variant... superior in every way, if only the
-  parts could be sourced at the same fab house" — XIAO Plus, machine-assembled — is now the **primary
-  design**, because Seeed *is* that house. The end state is a **turnkey, fully-assembled board** (no
-  DNP, no hand-solder), which is a strict upgrade over JLC-DNP-and-hand-solder.
+- **The matrix removed the need for the Plus.** The Plus's only draw was GPIO count, and that mattered
+  only for the abandoned **direct-pin** wiring (18 pins). The board is **matrix** now: 9 matrix + 1 RGB
+  data + 1 LED-enable = **11 GPIO = exactly a regular XIAO nRF52840 BLE.** (TOTEM is a 36-key matrix
+  split on the regular xiao_ble — proof it fits.)
+- **Sourcing + cost favor JLC + regular XIAO.** JLC turnkey-places the **regular** XIAO from stock
+  (`C17209540`, pre-order, **MOQ 1**, ~$16). The **Plus** is **reel-only (~$4k)** — not orderable in
+  2s. And a Seeed Fusion quote came back **>2× JLC** with an interface Hunter dislikes. So the regular
+  XIAO at JLC is cheaper, in stock at qty 2, and back in Hunter's normal flow.
 
-**Permanence note:** SMD-down means the controller is not socketed/removable. Accepted — Hunter
-already direct-solders MCUs (cf. xiphos/slim's slotted nano), so this changes nothing for him.
+Note the original "JLC can't place the MCU → DNP/hand-solder" pain is specific to the **nice!nano**
+(slimsplaydy/xiphos/LightFury), **not** the XIAO — JLC stocks + places the XIAO turnkey. So stactyl is
+**fully assembled at JLC**, no DNP, no hand-solder, no consignment beyond the usual PG1316S reel.
 
-**Watch-list fallback (not the plan):** base XIAO nRF52840 (`C37327670`, 11 GPIO) at JLC is the only
-turnkey-at-JLC option, but it forces the matrix anyway and has had stock/MOQ problems. Seeed + Plus is
-cleaner on every axis, so JLC is the fallback only if a Seeed Fusion quote doesn't pan out.
+(WalkThePlanck made the same Seeed→JLC pivot; see `[[seeed-turnkey-path]]` / `[[planck-c75-wireless-port]]`.)
 
 ## PCB approach — THE key decision (settled; layout model confirmed 2026-06-22)
 
@@ -110,8 +124,8 @@ BastardKB Charybdis / TBK Mini flex plates are built (Hunter's reference; confir
 - **Adjacent columns are joined by a single serpentine neck**, alternating top/bottom edge along the
   hand. The serpentine gives strain relief and lets each column sit at its own splay / stagger / height
   when bent.
-- **A rigid controller root** at the proximal edge carries the **XIAO nRF52840 Plus + power/reset +
-  battery connector**, reflowed onto the *same* board; the inner column necks into it and it **folds
+- **A rigid controller root** at the proximal edge carries the **regular XIAO nRF52840 BLE + power/reset
+  + battery connector + LED-switch MOSFET**, reflowed onto the *same* board; the inner column necks into it and it **folds
   under into the keywell pocket** (the printed pocket supports it). This is what makes each half a
   **single turnkey PCBA** — no separate controller board, no board-to-board connector. NB: still **one
   uniform 0.6 mm FR-4 sheet, not rigid-flex** — "rigid root" just means a solid, neck-free region that
@@ -193,17 +207,20 @@ Caveats / design tasks:
 - **`../ergogen-footprints`**: `switch_pg1316s`, `diode_smd_sod323f` (now **part of the design** — one
   per key for the matrix), `power_switch_smd_side`, `reset_switch_smd_side`, `magsafe_silkscreen`,
   `mounting_hole_npth`.
-  - **MCU footprint: need a XIAO nRF52840 Plus footprint** — the Plus exposes the extra back-side
-    castellated pads, so a plain XIAO BLE footprint won't do. Source from the `../XIAO KiCad` /
-    `../marbastlib` / ceoloide libs or build a Plus footprint in `../ergogen-footprints`. (The old
-    `mcu_nice_nano_smd` slotted footprint is no longer relevant.)
+  - **MCU footprint: a regular XIAO nRF52840 (BLE) footprint** — the standard 2-row XIAO, no back-side
+    pads (we're not using the Plus). Source from `../XIAO KiCad` / `../marbastlib` / ceoloide, or check
+    whether `xiao_ble_breakout_holes` + a XIAO pad footprint in `../ergogen-footprints` already cover
+    it. (`mcu_nice_nano_smd` is no longer relevant.)
   - **RGB footprint:** **SK6805-1515 (EC15)** footprint, `C2890035` (per-key in the switch cutout +
     underglow). Reuse LightFury's `led_ws2812b_2020` *placement* pattern (in-cutout `led_pos` offset,
     the up/dn rotate-for-routing trick, diode shift), but build/adapt a 1515 footprint with EC15 pad
     order (1=DIN 2=VDD 3=DOUT 4=GND) — don't reuse the 2020 pad geometry directly.
+  - **LED-switch footprint group:** the WalkThePlanck high-side-switch block — **Q1 AO3401A** (P-ch,
+    SOT-23, `C15127`) + **Q2 2N7002** (N-ch driver, SOT-23) + **R1/R3 10k 0402** (gate pull-up/down) +
+    **R2 330R 0402** (SK6805 data series). Reuse WalkThePlanck's footprint + net pattern wholesale.
 - **`../slimsplaydy` + `../xiphos` PCBA flow**: consigned-reel BOM/CPL, KiKit multiboard panelization,
-  the embedded-magnet + registration clasp pattern (adapt to 3D pads here). **Order config differs:**
-  Seeed Fusion turnkey, not JLC-DNP (see Production).
+  the embedded-magnet + registration clasp pattern (adapt to 3D pads here). Same **JLC turnkey** order
+  flow, just fully-assembled (no DNP — the XIAO is JLC-placeable; see Production).
 - **Firmware base:** start from **`../zmk-config-tbkmini`** (the **matrix** shield) — the right match
   now that stactyl is matrix-wired. `../zmk-config-xiphos` (direct-pin) is no longer the base. Reuse
   the sweep-pro keymap lineage either way. Board target = `xiao_ble//zmk` (not nice_nano).
@@ -212,21 +229,19 @@ Caveats / design tasks:
   by NC/SA; the column geometry is a *target*, not a copied asset. Non-commercial anyway = fine for
   Hunter's personal use; just don't sell derivatives of their files.
 
-## Production (Seeed Fusion PCBA — turnkey)
+## Production (JLCPCB PCBA — turnkey)
 
-**Breaks from the slimsplaydy/xiphos JLC model** — this is the board where we go fully assembled.
+Same JLC model as slimsplaydy/xiphos for fab, but **fully assembled** (the XIAO is JLC-placeable, so
+no DNP/hand-solder — that pain was nice!nano-specific).
 
-- **Fab + assembly at Seeed Fusion**, **fully assembled / turnkey** — no DNP, no hand-solder. The
-  XIAO Plus is Seeed's catalog part (machine-placed); diodes + RGB LEDs machine-placed; **PG1316S
-  consigned `C9900170245`** (consignment moves JLC → Seeed for this board).
-- **"Full stop" requires an all-SMD, machine-placeable BOM.** Audit every part and swap to
-  Seeed-stocked equivalents where easier (Hunter has no religion on the battery connector). Confirm
-  the power switch, reset switch, and battery connector are all SMD or accept Seeed's THT line. The
-  current JLC refs (Molex Pico-EZmate `C505023`, power `C2911519`, reset `C79174`) are LCSC/JLC part
-  numbers — **re-source against Seeed's catalog**.
-- **Get a written Seeed Fusion quote** covering consigned PG1316S + turnkey XIAO Plus + thin FR-4 in
-  one order — everything rests on that assumption. Order the Plus units for stactyl **and** the Planck
-  build together.
+- **Fab + assembly at JLCPCB**, fully assembled — the **regular XIAO BLE** is placed turnkey from JLC
+  stock (`C17209540`, pre-order, MOQ 1); diodes + RGB LEDs + LED-switch MOSFET machine-placed;
+  **PG1316S consigned `C9900170245`** (the only consigned part, Hunter's normal flow).
+- **All-SMD, machine-placeable BOM.** Confirm every part is JLC-stocked + SMD: XIAO `C17209540`,
+  SK6805-1515 `C2890035`, SOD-323 diodes, LED switch **AO3401A `C15127`** (Basic), Molex Pico-EZmate
+  `C505023`, power `C2911519`, reset `C79174`. Prefer **Basic** parts to avoid extended-part fees.
+- Flow is Hunter's usual JLC turnkey (gerbers + CPL + BOM); no Seeed, no second consignment
+  relationship. Order qty per usual.
 - Panelize with **KiKit** (on Hunter's machine) after routing — fab-agnostic, unchanged. Order the
   plate at **0.6 mm FR-4** (0.8 mm fallback if 0.6 mm bends too hard for the scoop).
 
@@ -245,48 +260,52 @@ Caveats / design tasks:
       outboard-pinky stub, and the thumb tail. Orient each neck's hinge + validate bend angle vs FR-4
       tolerance. Diode tucks beside each switch on its strip (LED sits in the switch cutout). Produces
       the outline + footprint placement, *not* a routed board.
-- [ ] **Footprints (prereq for the PCB).** Inventory of `../ergogen-footprints` (2026-06-22):
-      `diode_smd_sod323f` ✅, `switch_pg1316s` ✅, and XIAO Plus helpers ✅
-      (`xiao_ble_plus_breakout_holes`, `util_xiao_ble_plus_cutout[_simple]`). **Missing: an EC15 LED
-      footprint** — only `led_ws2812b_2020` exists; create an **SK6805-1515 / EC15** footprint (1.5×1.5,
-      pad order 1=DIN 2=VDD 3=DOUT 4=GND) via kicad2ergogen, edit in `../ergogen-footprints` first then
-      mirror in. Confirm the XIAO Plus helpers compose into a full solder-down footprint (vs needing a
-      base `mcu_xiao` footprint). Local `footprints/` still carries the stale `mcu_nice_nano_smd.js` —
-      remove once the XIAO Plus footprint is mirrored in.
+- [ ] **Footprints (prereq for the PCB).** Inventory of `../ergogen-footprints`:
+      `diode_smd_sod323f` ✅, `switch_pg1316s` ✅, regular-XIAO helpers ✅ (`xiao_ble_breakout_holes`,
+      `util_xiao_ble_cutout[_simple]`). **Missing: an EC15 LED footprint** — only `led_ws2812b_2020`
+      exists; create an **SK6805-1515 / EC15** footprint (1.5×1.5, pad order 1=DIN 2=VDD 3=DOUT 4=GND)
+      via kicad2ergogen, edit in `../ergogen-footprints` first then mirror in. Also need a **SOT-23**
+      footprint for the LED-switch MOSFET (AO3401A) — reuse WalkThePlanck's. Confirm the regular-XIAO
+      helpers give a full solder-down footprint. Local `footprints/` still carries the stale
+      `mcu_nice_nano_smd.js` — remove once the XIAO footprint is mirrored in.
 - [ ] **PCB layout + routing (KiCad) — the core build job.** From the comb layout: place
       switch + in-cutout LED + diode per key on each column strip, then route the ~5×4 matrix + RGB
       power/data through the necks (both copper layers; necks nearest the root are busiest), the XIAO
-      Plus breakout on the root, and
+      breakout + LED-switch MOSFET on the root, and
       power/reset/battery. **Both halves on one `.kicad_pcb`** (two closed Edge.Cuts outlines, `L_`/`R_`
       nets) per workspace convention. DRC clean before panelizing.
 - [ ] **Schematic build/sync.** ergogen emits no schematic — build per `Schematics_and_Ergogen.md`
       (match refs/pins/nets to the ergogen PCB, then KiCad *Update Schematic from PCB*). Needs symbols
-      for the XIAO Plus + SK6805-1515 (add to `huntercook.kicad_sym` / `${HLC_SYMBOLS}` if missing).
-- [ ] **Panelize (KiKit) for the Seeed order.** Multiboard panel — route first, panelize after — on
+      for the XIAO BLE + SK6805-1515 + AO3401A (add to `huntercook.kicad_sym` / `${HLC_SYMBOLS}` if missing).
+- [ ] **Panelize (KiKit) for the JLC order.** Multiboard panel — route first, panelize after — on
       Hunter's machine (KiKit runs against pcbnew). Rails / mouse-bites / fiducials / tooling holes per
       the standard flow; frame wraps the final routed outline.
 - [x] Finalize 2-key thumb cluster + outboard pinky positions. 2026-06-18. Curved 2-key thumb;
       outboard pinky = 1u (custom rounded/tri caps + case clearance to be done in CAD).
 - [x] ~~Controller + wiring: nice!nano, direct-pin, no diodes (xiphos recipe). 2026-06-18.~~
-      **SUPERSEDED 2026-06-22 → XIAO nRF52840 Plus + matrix + diodes, turnkey at Seeed.** See
-      "Why XIAO Plus + Seeed."
+      **SUPERSEDED → regular XIAO nRF52840 BLE + matrix + diodes, JLC turnkey (2026-06-23).** See
+      "Why regular XIAO + JLC."
 - [ ] **Controller + LiPo + USB pocket (custom CAD, decoupled from Cosmos).** Cosmos's auto MCU
       holder + connector are nulled in the Expert config (didn't fit the tight shell + stow-volume
-      goal). On the exported STEP we model: a **XIAO Plus pocket** (smaller than nice!nano), a LiPo
+      goal). On the exported STEP we model: a **regular XIAO pocket** (smaller than nice!nano), a LiPo
       pocket, and a USB-C cutout aligned to the **XIAO's** onboard port (charges/flashes through that
       port — no separate connector).
 - [ ] Stowed-pose CAD assembly → matched magnet pads + registration; settle rotation/offset.
-- [ ] **Firmware retarget (reorientation).** `zmk-config-stactyl` was cloned from xiphos (direct-pin,
-      `nice_nano//zmk`); **re-base on `zmk-config-tbkmini` (matrix), board target `xiao_ble//zmk`,
-      `kscan-gpio-matrix` + diodes.** Pins still PLACEHOLDER until the PCB is routed. (Original
-      2026-06-18 direct-pin skeleton is now wrong wiring.)
-- [ ] **RGB scope (added 2026-06-22; part LOCKED = SK6805-1515 / EC15 `C2890035`, top-side in switch
-      cutout per LightFury).** Remaining: build/adapt the EC15 footprint (pad order 1=DIN 2=VDD 3=DOUT
-      4=GND), per-key + underglow chain topology + data pin, ZMK RGB config, battery budget / cell size,
-      and the Seeed supply check (catalog vs consign).
-- [ ] **Seeed Fusion quote + BOM audit.** Written quote for consigned PG1316S + turnkey XIAO Plus +
-      thin FR-4; audit BOM to all-SMD and re-source parts against Seeed's catalog. Order Plus units
-      with the Planck build.
+- [x] **Firmware retarget — DONE 2026-06-23.** `zmk-config-stactyl` converted to `kscan-gpio-matrix`
+      on `xiao_ble//zmk` (regular XIAO; `xiao_ble` is the regular target), modeled on
+      `../zmk-config-totem`. Builds green. Pins + R3 cells still PLACEHOLDER until the PCB is routed.
+- [ ] **Firmware RGB + ext-power.** Add the SK6805 `ws2812`/`zmk,underglow` config + data pin, and a
+      **`zmk,ext-power`** node on the 11th GPIO (the AO3401A gate) so ZMK cuts the LED rail on
+      idle/sleep. Mirror WalkThePlanck's ext-power setup.
+- [ ] **RGB scope (part LOCKED = SK6805-1515 / EC15 `C2890035`, top-side in switch cutout).**
+      Remaining: build/adapt the EC15 footprint (1=DIN 2=VDD 3=DOUT 4=GND), per-key + underglow chain
+      topology + data pin, the LED-rail MOSFET switch (AO3401A `C15127`), and battery budget / cell size.
+- [ ] **JLC BOM audit + order.** Confirm all parts JLC-stocked + SMD (prefer Basic): XIAO `C17209540`,
+      SK6805 `C2890035`, 1N4148WT SOD-323 diodes, **LED-switch block** (AO3401A `C15127` + 2N7002 +
+      2×10k 0402 + 330R 0402), EZmate `C505023`, power `C2911519`, reset `C79174`; PG1316S consigned
+      `C9900170245`. NOTE: stactyl does **not** use WalkThePlanck's 74HC595 shift registers (that's its
+      single-MCU unibody matrix expansion — stactyl is a per-half split with a direct 5×4 matrix).
+      Standard JLC turnkey order (gerbers + CPL + BOM).
 - [x] Name: **stactyl** (stacks + dactyl). 2026-06-18.
 - [x] **git:** both repos created + pushed 2026-06-18 — `jusdisgi/stactyl` (incl. the locked
       Cosmos geometry + design docs) and `jusdisgi/zmk-config-stactyl` (firmware skeleton). Ongoing
